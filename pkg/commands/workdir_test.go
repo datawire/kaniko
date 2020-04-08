@@ -36,7 +36,7 @@ var workdirTests = []struct {
 	snapshotFiles []string
 }{
 	{
-		path:          "/a",
+		path:          "./a",
 		expectedPath:  "/a",
 		snapshotFiles: []string{"/a"},
 	},
@@ -92,7 +92,9 @@ func TestWorkdirCommand(t *testing.T) {
 	}()
 
 	cfg := &v1.Config{
-		WorkingDir: "/",
+		// Images don't need to already have WorkingDir set;
+		// "" is equivalent to the root directory.
+		WorkingDir: "",
 		Env: []string{
 			"path=usr/",
 			"home=/root",
